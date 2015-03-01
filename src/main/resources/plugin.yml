@@ -1,0 +1,4 @@
+name: NodeBBIntegration
+main: com.yaricraft.nodebbintegration.NodeBBIntegration
+version: 0.0.1
+author: Timothy Fike
