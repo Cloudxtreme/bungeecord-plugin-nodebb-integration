@@ -39,8 +39,9 @@
                         <configuration>
                             <artifactSet>
                                 <includes>
-                                    <include>org.apache.httpcomponents:*</include>
-                                    <include>commons-logging:*</include>
+                                    <include>com.corundumstudio.socketio:*</include>
+                                    <include>org.slf4j:*</include>
+                                    <include>com.fasterxml.jackson.core:*</include>
                                 </includes>
                             </artifactSet>
                         </configuration>
@@ -59,19 +60,24 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-            <version>4.3.6</version>
+            <groupId>com.corundumstudio.socketio</groupId>
+            <artifactId>netty-socketio</artifactId>
+            <version>1.7.6</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpcore</artifactId>
-            <version>4.3.3</version>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+            <version>4.0.24.Final</version>
         </dependency>
         <dependency>
-            <groupId>commons-logging</groupId>
-            <artifactId>commons-logging</artifactId>
-            <version>1.1.1</version>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.12</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.5.3</version>
         </dependency>
     </dependencies>
 </project>

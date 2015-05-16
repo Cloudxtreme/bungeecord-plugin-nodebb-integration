@@ -9,6 +9,10 @@ import net.md_5.bungee.config.YamlConfiguration;
 import java.io.File;
 import java.io.IOException;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URI;
+
 public class NodeBBIntegration extends Plugin {
     private enum defaults {
         URL("https://community.example.com/register/mc"),
@@ -34,6 +38,7 @@ public class NodeBBIntegration extends Plugin {
         proxy.getPluginManager().registerCommand(this, new CommandNodeBB("nodebb"));
         NodeBBIntegration.dataFolder = getDataFolder();
         loadConfig();
+        initSocketConnector(new SocketConnector("http://www.yaricraft.com/"));
     }
 
     public static void loadConfig() {
@@ -68,6 +73,10 @@ public class NodeBBIntegration extends Plugin {
     }
 
     public void scheduleRegisterTask(RegisterTask task) {
+        getProxy().getScheduler().runAsync(this, task);
+    }
+
+    public void initSocketConnector(SocketConnector task) {
         getProxy().getScheduler().runAsync(this, task);
     }
 }
