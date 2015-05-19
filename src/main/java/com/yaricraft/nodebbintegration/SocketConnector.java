@@ -12,16 +12,14 @@ import net.md_5.bungee.api.connection.ProxiedPlayer;
 
 public class SocketConnector implements Runnable
 {
-    public SocketConnector(String uri) {
-        this.uri = uri;
+    public SocketConnector() {
         this.config = new Configuration();
         this.config.setHostname("localhost");
-        this.config.setPort(25578);
+        this.config.setPort(NodeBBIntegration.config.getInt("APIPORT"));
     }
 
     public static Configuration config;
     public static SocketIOServer server;
-    public static String uri;
 
     @Override
     public void run()

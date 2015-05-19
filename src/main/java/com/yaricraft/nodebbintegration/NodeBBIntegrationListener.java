@@ -10,4 +10,7 @@ public class NodeBBIntegrationListener implements Listener {
         // TODO: Get the player's nodebb username and message them if they have not registered yet.
         //event.getPlayer().sendMessage(new ComponentBuilder("Use \"/register EMAIL PASSWORD\" to register on our forums!").color(ChatColor.GREEN).create());
     }
+
+
+
 }

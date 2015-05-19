@@ -10,12 +10,12 @@ import net.md_5.bungee.api.plugin.Command;
  */
 public class CommandRegister extends Command
 {
-    NodeBBIntegration node;
+    NodeBBIntegration plugin;
 
-    public CommandRegister(String name, NodeBBIntegration node)
+    public CommandRegister(String name, NodeBBIntegration plugin)
     {
         super(name);
-        this.node = node;
+        this.plugin = plugin;
     }
 
     public enum params
@@ -33,7 +33,7 @@ public class CommandRegister extends Command
             }
             commandSender.sendMessage(new ComponentBuilder("Please use /register" + msg).color(ChatColor.GREEN).create());
         }else{
-            node.scheduleRegisterTask(new RegisterTask(commandSender, strings));
+            plugin.runAsync(new RegisterTask(commandSender, strings));
         }
     }
 }

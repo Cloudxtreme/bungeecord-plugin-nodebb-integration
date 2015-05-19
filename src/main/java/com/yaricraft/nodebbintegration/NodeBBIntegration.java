@@ -17,7 +17,8 @@ public class NodeBBIntegration extends Plugin {
     private enum defaults {
         URL("https://community.example.com/register/mc"),
         FORUMNAME("https://community.example.com/"),
-        KEY("SECRETPASSWORD");
+        KEY("SECRETPASSWORD"),
+        APIPORT("25578");
 
         public String value;
 
@@ -29,6 +30,8 @@ public class NodeBBIntegration extends Plugin {
     private static File dataFolder;
     public static Configuration config;
     public static ProxyServer proxy;
+    public static SocketConnector socketConnector;
+
 
     @Override
     public void onEnable() {
@@ -38,7 +41,8 @@ public class NodeBBIntegration extends Plugin {
         proxy.getPluginManager().registerCommand(this, new CommandNodeBB("nodebb"));
         NodeBBIntegration.dataFolder = getDataFolder();
         loadConfig();
-        initSocketConnector(new SocketConnector("http://www.yaricraft.com/"));
+        socketConnector = new SocketConnector();
+        runAsync(socketConnector);
     }
 
     public static void loadConfig() {
@@ -51,6 +55,7 @@ public class NodeBBIntegration extends Plugin {
                 config.set("URL", defaults.URL.value);
                 config.set("FORUMNAME", defaults.FORUMNAME.value);
                 config.set("KEY", defaults.KEY.value);
+                config.set("APIPORT", defaults.APIPORT.value);
                 configFile.createNewFile();
                 ConfigurationProvider.getProvider(YamlConfiguration.class).save(config, configFile);
                 System.out.println("Created new config.yml for NodeBBIntegration.");
@@ -72,11 +77,7 @@ public class NodeBBIntegration extends Plugin {
         }
     }
 
-    public void scheduleRegisterTask(RegisterTask task) {
-        getProxy().getScheduler().runAsync(this, task);
-    }
-
-    public void initSocketConnector(SocketConnector task) {
+    public void runAsync(Runnable task) {
         getProxy().getScheduler().runAsync(this, task);
     }
 }
