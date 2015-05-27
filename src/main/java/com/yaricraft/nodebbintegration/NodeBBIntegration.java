@@ -18,6 +18,7 @@ public class NodeBBIntegration extends Plugin {
         URL("https://community.example.com/register/mc"),
         FORUMNAME("https://community.example.com/"),
         KEY("SECRETPASSWORD"),
+        APIHOSTNAME("localhost"),
         APIPORT("25578");
 
         public String value;
@@ -31,7 +32,6 @@ public class NodeBBIntegration extends Plugin {
     public static Configuration config;
     public static ProxyServer proxy;
     public static SocketConnector socketConnector;
-
 
     @Override
     public void onEnable() {
@@ -55,6 +55,7 @@ public class NodeBBIntegration extends Plugin {
                 config.set("URL", defaults.URL.value);
                 config.set("FORUMNAME", defaults.FORUMNAME.value);
                 config.set("KEY", defaults.KEY.value);
+                config.set("APIHOSTNAME", defaults.APIHOSTNAME.value);
                 config.set("APIPORT", defaults.APIPORT.value);
                 configFile.createNewFile();
                 ConfigurationProvider.getProvider(YamlConfiguration.class).save(config, configFile);
@@ -72,6 +73,18 @@ public class NodeBBIntegration extends Plugin {
             } catch (IOException e)
             {
                 System.out.println("Could not find config file:");
+                e.printStackTrace();
+            }
+
+            if (config.get("URL") == null) config.set("URL", defaults.URL.value);
+            if (config.get("FORUMNAME") == null) config.set("FORUMNAME", defaults.FORUMNAME.value);
+            if (config.get("KEY") == null) config.set("KEY", defaults.KEY.value);
+            if (config.get("APIHOSTNAME") == null) config.set("APIHOSTNAME", defaults.APIHOSTNAME.value);
+            if (config.get("APIPORT") == null) config.set("APIPORT", defaults.APIPORT.value);
+
+            try {
+                ConfigurationProvider.getProvider(YamlConfiguration.class).save(config, configFile);
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }

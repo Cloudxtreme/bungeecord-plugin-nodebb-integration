@@ -14,7 +14,7 @@ public class SocketConnector implements Runnable
 {
     public SocketConnector() {
         this.config = new Configuration();
-        this.config.setHostname("localhost");
+        this.config.setHostname(NodeBBIntegration.config.getString("APIHOSTNAME"));
         this.config.setPort(NodeBBIntegration.config.getInt("APIPORT"));
     }
 
@@ -24,6 +24,7 @@ public class SocketConnector implements Runnable
     @Override
     public void run()
     {
+        System.out.println("Starting SocketIO Server...");
         server = new SocketIOServer(config);
         server.addListeners(this);
         server.start();
